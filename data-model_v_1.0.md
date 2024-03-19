@@ -19,12 +19,12 @@ class ChangeHistory {
 class User {
     Firstname: string
     Lastname: string
-    Age: int
-    Birthday: DateOnly
+    Age: int?
+    Birthday: DateOnly?
     UserRole: UserRoleType
-    Address: Address
-    AreaCode: int
-    MobileNumber: int
+    Address: Address?
+    AreaCode: int?
+    MobileNumber: int?
     Email: MailAddress
 }
 
@@ -65,7 +65,7 @@ class Interest {
 }
 
 class Post {
-    Message
+    Message: string
 }
 
 
@@ -82,9 +82,10 @@ Event "0..*" --- "0..*" User : has participants
 User "0..*" --- "0..*" User : follows
 Event "1" o--- "0..*" Address : has
 User "0..*" --- "0..*" Interest : has
-Event "1" o--- "1" Chat : has
+Event "0..*" --- "0..*" Interest : has
+Event "1" o--- "0..*" Chat : has
 Chat "1" o--- "1" User : has
-Chat "0..*" --- "0..*" Event : has
-Post "0..*" --- "0..*" User : has
+Post "0..*" ---o "1" Chat : has
+User "0..*" --- "0..1" Address : has
 
 @enduml
