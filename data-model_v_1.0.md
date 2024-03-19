@@ -64,7 +64,7 @@ class Interest {
     Name: string
 }
 
-class Post {
+abstract class Post {
     Message: string
 }
 
