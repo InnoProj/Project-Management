@@ -19,10 +19,8 @@ class ChangeHistory {
 class User {
     Firstname: string
     Lastname: string
-    Age: int?
-    Birthday: DateOnly?
+    Birthday: DateOnly
     UserRole: UserRoleType
-    Address: Address?
     AreaCode: int?
     MobileNumber: int?
     Email: MailAddress
@@ -86,6 +84,5 @@ Event "0..*" --- "0..*" Interest : has
 Event "1" o--- "0..*" Chat : has
 Chat "1" o--- "1" User : has
 Post "0..*" ---o "1" Chat : has
-User "0..*" --- "0..1" Address : has
 
 @enduml
