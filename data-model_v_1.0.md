@@ -44,18 +44,12 @@ class Event {
     MaxParticipants: int
     Location: Address
     RegistrationDeadline: DateTime
-}
-
-class Chat {
-    Message: string
-}
-
-class Blocked {
-
+    PictureBlob : string
 }
 
 class ReportedUser {
-    Description: string
+    Reason: string
+    --asödlfjaösldjf
 }
 
 class Interest {
@@ -63,26 +57,45 @@ class Interest {
 }
 
 abstract class Post {
-    Message: string
+    Message : string
 }
+
+class PrivateChatPost {
+    
+}
+
+class AllChatPost {
+    
+}
+
+class PrivateChat {
+
+}
+
+
 
 
 class User extends Base
 class Event extends Base
 class Address extends Base
 class User extends UserRoleType
-class Chat extends Base
 class Post extends Base
 class ReportedUser extends Base
-class Blocked extends Base
+class PrivateChatPost extends Post
+class AllChatPost extends Post
+class PrivateChat extends Base
+AllChatPost "0..*" ---o "1" Event : has
 User "1" o--- "0..*" Event : creates
 Event "0..*" --- "0..*" User : has participants
 User "0..*" --- "0..*" User : follows
 Event "1" o--- "0..*" Address : has
 User "0..*" --- "0..*" Interest : has
 Event "0..*" --- "0..*" Interest : has
-Event "1" o--- "0..*" Chat : has
-Chat "1" o--- "1" User : has
-Post "0..*" ---o "1" Chat : has
-
+Post "1" ---o "1" User : has
+PrivateChat "1" ---o "1" User : creates
+PrivateChat "1" ---o "1" User : participates
+PrivateChat "1" ---o "1" PrivateChatPost : has
+ReportedUser "1" ---o "1" User : reports
+ReportedUser "1" ---o "1" User : is reported
+ReportedUser "1" ---o "1" Event : is connected
 @enduml
