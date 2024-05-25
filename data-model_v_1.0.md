@@ -8,12 +8,9 @@ abstract class Base {
 }
 
 enum UserRoleType {
+    SuperAdmin
     Admin
     User
-}
-
-class ChangeHistory {
-    UpdatedAt: DateTime
 }
 
 class User {
@@ -22,7 +19,7 @@ class User {
     Birthday: DateOnly
     UserRole: UserRoleType
     AreaCode: int?
-    MobileNumber: int?
+    PhoneNumber: string?
     Email: MailAddress
 }
 
@@ -30,7 +27,7 @@ class Address {
     Street: string
     HouseNumber: string
     Additional: string
-    PostalCode: int
+    PostalCode: string
     City: string
     Country : string
 }
@@ -48,8 +45,13 @@ class Event {
 }
 
 class ReportedUser {
-    Reason: string
-    --asödlfjaösldjf
+    IssueDescription: string
+    Reason: ReportReason
+}
+
+enum ReportReason {
+    unangemessene_Sprache
+    Keine Rückmeldung
 }
 
 class Interest {
@@ -76,9 +78,9 @@ class PrivateChat {
 
 
 class User extends Base
+class User extends IdentityUser
 class Event extends Base
 class Address extends Base
-class User extends UserRoleType
 class Post extends Base
 class ReportedUser extends Base
 class PrivateChatPost extends Post
